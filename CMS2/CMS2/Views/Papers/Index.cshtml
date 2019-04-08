@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CMS2.Models.Paper>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paperAbstract)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.keywordList)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publishDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reviewstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finalstate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paperType)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Author.authorId)
+        </th>             
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paperAbstract)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.keywordList)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.publishDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reviewstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.finalstate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paperType)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.authorId)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.paperId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.paperId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.paperId })|
+            @Html.ActionLink("AssignReviewer", "AssignReviewer", "Reviews", new { paperId = item.paperId },null)
+        </td>
+    </tr>
+}
+
+</table>

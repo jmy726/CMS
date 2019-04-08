@@ -1,0 +1,30 @@
+﻿@model CMS2.Models.Checkbox
+
+<tr>
+    <td>
+        @Html.CheckBoxFor(model => model.IsSelected)
+
+    </td>
+    <td>
+        @Html.DisplayFor(model => model.Email)
+        @Html.HiddenFor(model => model.Email)
+    </td>
+    <td>
+        @Html.HiddenFor(model => model.reviewerId)
+
+    </td>
+    <td>
+        @Html.DisplayFor(model => model.name)
+        @Html.HiddenFor(model => model.name)
+    </td>
+    <td>
+        @Html.DisplayFor(model => model.keyword)
+        @Html.HiddenFor(model => model.keyword)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=model.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=model.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=model.PrimaryKey */ })
+    </td>
+</tr>
+

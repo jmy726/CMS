@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CMS2.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card-header" data-background-color="purple">
+    <h4 class="title">Review</h4>
+    <p class="category">@Html.ActionLink("Create New", "Create")</p>
+</div>
+<div class="card-content table-responsive">
+    <table class="table">
+        <thead class="text-primary">
+            <tr>
+                <th>reviewDate</th>
+                <th>rating</th>
+                <th>reviewDesc</th>
+                <th>Paper title</th>
+                <th>reviewerId</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.reviewDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.reviewDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paper.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reviewer.reviewerId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.reviewId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.reviewId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.reviewId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CMS2.Models.Conference>
+
+@{
+    ViewBag.Title = "MyConference";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MyConference</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.beginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDate)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chair.chairId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.beginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chair.chairId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.conferenceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.conferenceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.conferenceId })
+        </td>
+    </tr>
+}
+
+</table>

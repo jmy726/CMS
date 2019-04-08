@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMSModelStoreContainer" CdmEntityContainer="CMS">
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="CMSModel.Author">
+        <MappingFragment StoreEntitySet="Author">
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chairs">
+      <EntityTypeMapping TypeName="CMSModel.Chair">
+        <MappingFragment StoreEntitySet="Chair">
+          <ScalarProperty Name="chairId" ColumnName="chairId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conferences">
+      <EntityTypeMapping TypeName="CMSModel.Conference">
+        <MappingFragment StoreEntitySet="Conference">
+          <ScalarProperty Name="chairId" ColumnName="chairId" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="beginDate" ColumnName="beginDate" />
+          <ScalarProperty Name="conferenceId" ColumnName="conferenceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Keywords">
+      <EntityTypeMapping TypeName="CMSModel.Keyword">
+        <MappingFragment StoreEntitySet="Keywords">
+          <ScalarProperty Name="keyword1" ColumnName="keyword" />
+          <ScalarProperty Name="keywordId" ColumnName="keywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Papers">
+      <EntityTypeMapping TypeName="CMSModel.Paper">
+        <MappingFragment StoreEntitySet="Paper">
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+          <ScalarProperty Name="conferenceId" ColumnName="conferenceId" />
+          <ScalarProperty Name="paperType" ColumnName="paperType" />
+          <ScalarProperty Name="finalstate" ColumnName="finalstate" />
+          <ScalarProperty Name="reviewstatus" ColumnName="reviewstatus" />
+          <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+          <ScalarProperty Name="keywordList" ColumnName="keywordList" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="paperAbstract" ColumnName="paperAbstract" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="paperId" ColumnName="paperId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="CMSModel.Review">
+        <MappingFragment StoreEntitySet="Review">
+          <ScalarProperty Name="paperId" ColumnName="paperId" />
+          <ScalarProperty Name="reviewerId" ColumnName="reviewerId" />
+          <ScalarProperty Name="reviewDesc" ColumnName="reviewDesc" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
+          <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviewers">
+      <EntityTypeMapping TypeName="CMSModel.Reviewer">
+        <MappingFragment StoreEntitySet="Reviewer">
+          <ScalarProperty Name="keywords" ColumnName="keywords" />
+          <ScalarProperty Name="reviewerId" ColumnName="reviewerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CMSModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

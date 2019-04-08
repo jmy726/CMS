@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CMS" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="CMSModel.Author" />
+    <EntitySet Name="Chairs" EntityType="CMSModel.Chair" />
+    <EntitySet Name="Conferences" EntityType="CMSModel.Conference" />
+    <EntitySet Name="Keywords" EntityType="CMSModel.Keyword" />
+    <EntitySet Name="Papers" EntityType="CMSModel.Paper" />
+    <EntitySet Name="Reviews" EntityType="CMSModel.Review" />
+    <EntitySet Name="Reviewers" EntityType="CMSModel.Reviewer" />
+    <EntitySet Name="Users" EntityType="CMSModel.User" />
+    <AssociationSet Name="FK_Chair_ToTable1" Association="CMSModel.FK_Chair_ToTable1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Author" EntitySet="Authors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paper_ToTable5" Association="CMSModel.FK_Paper_ToTable5">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Paper" EntitySet="Papers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chair_ToTable" Association="CMSModel.FK_Chair_ToTable">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Chair" EntitySet="Chairs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conference_ToTable8" Association="CMSModel.FK_Conference_ToTable8">
+      <End Role="Chair" EntitySet="Chairs" />
+      <End Role="Conference" EntitySet="Conferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paper_ToTable4" Association="CMSModel.FK_Paper_ToTable4">
+      <End Role="Conference" EntitySet="Conferences" />
+      <End Role="Paper" EntitySet="Papers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_ToTable11" Association="CMSModel.FK_Review_ToTable11">
+      <End Role="Paper" EntitySet="Papers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_ToTable10" Association="CMSModel.FK_Review_ToTable10">
+      <End Role="Reviewer" EntitySet="Reviewers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chair_ToTable3" Association="CMSModel.FK_Chair_ToTable3">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Reviewer" EntitySet="Reviewers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="authorId" />
+    </Key>
+    <Property Name="authorId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="CMSModel.FK_Chair_ToTable1" FromRole="Author" ToRole="User" />
+    <NavigationProperty Name="Papers" Relationship="CMSModel.FK_Paper_ToTable5" FromRole="Author" ToRole="Paper" />
+  </EntityType>
+  <EntityType Name="Chair">
+    <Key>
+      <PropertyRef Name="chairId" />
+    </Key>
+    <Property Name="chairId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="CMSModel.FK_Chair_ToTable" FromRole="Chair" ToRole="User" />
+    <NavigationProperty Name="Conferences" Relationship="CMSModel.FK_Conference_ToTable8" FromRole="Chair" ToRole="Conference" />
+  </EntityType>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="conferenceId" />
+    </Key>
+    <Property Name="conferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="topic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="chairId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Chair" Relationship="CMSModel.FK_Conference_ToTable8" FromRole="Conference" ToRole="Chair" />
+    <NavigationProperty Name="Papers" Relationship="CMSModel.FK_Paper_ToTable4" FromRole="Conference" ToRole="Paper" />
+  </EntityType>
+  <EntityType Name="Keyword">
+    <Key>
+      <PropertyRef Name="keywordId" />
+    </Key>
+    <Property Name="keywordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="keyword1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Paper">
+    <Key>
+      <PropertyRef Name="paperId" />
+    </Key>
+    <Property Name="paperId" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="paperAbstract" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="keywordList" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="publishDate" Type="DateTime" Precision="0" />
+    <Property Name="reviewstatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="finalstate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="paperType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="conferenceId" Type="Int32" />
+    <Property Name="authorId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Author" Relationship="CMSModel.FK_Paper_ToTable5" FromRole="Paper" ToRole="Author" />
+    <NavigationProperty Name="Conference" Relationship="CMSModel.FK_Paper_ToTable4" FromRole="Paper" ToRole="Conference" />
+    <NavigationProperty Name="Reviews" Relationship="CMSModel.FK_Review_ToTable11" FromRole="Paper" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="reviewId" />
+    </Key>
+    <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reviewDate" Type="DateTime" Precision="0" />
+    <Property Name="rating" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="reviewDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="reviewerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="paperId" Type="Int32" />
+    <NavigationProperty Name="Paper" Relationship="CMSModel.FK_Review_ToTable11" FromRole="Review" ToRole="Paper" />
+    <NavigationProperty Name="Reviewer" Relationship="CMSModel.FK_Review_ToTable10" FromRole="Review" ToRole="Reviewer" />
+  </EntityType>
+  <EntityType Name="Reviewer">
+    <Key>
+      <PropertyRef Name="reviewerId" />
+    </Key>
+    <Property Name="reviewerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="keywords" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reviews" Relationship="CMSModel.FK_Review_ToTable10" FromRole="Reviewer" ToRole="Review" />
+    <NavigationProperty Name="User" Relationship="CMSModel.FK_Chair_ToTable3" FromRole="Reviewer" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="userType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Author" Relationship="CMSModel.FK_Chair_ToTable1" FromRole="User" ToRole="Author" />
+    <NavigationProperty Name="Chair" Relationship="CMSModel.FK_Chair_ToTable" FromRole="User" ToRole="Chair" />
+    <NavigationProperty Name="Reviewer" Relationship="CMSModel.FK_Chair_ToTable3" FromRole="User" ToRole="Reviewer" />
+  </EntityType>
+  <Association Name="FK_Chair_ToTable1">
+    <End Type="CMSModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Author" Role="Author" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paper_ToTable5">
+    <End Type="CMSModel.Author" Role="Author" Multiplicity="0..1" />
+    <End Type="CMSModel.Paper" Role="Paper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="authorId" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chair_ToTable">
+    <End Type="CMSModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Chair" Role="Chair" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Chair">
+        <PropertyRef Name="chairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conference_ToTable8">
+    <End Type="CMSModel.Chair" Role="Chair" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Conference" Role="Conference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chair">
+        <PropertyRef Name="chairId" />
+      </Principal>
+      <Dependent Role="Conference">
+        <PropertyRef Name="chairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paper_ToTable4">
+    <End Type="CMSModel.Conference" Role="Conference" Multiplicity="0..1" />
+    <End Type="CMSModel.Paper" Role="Paper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="conferenceId" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="conferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_ToTable11">
+    <End Type="CMSModel.Paper" Role="Paper" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paper">
+        <PropertyRef Name="paperId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="paperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_ToTable10">
+    <End Type="CMSModel.Reviewer" Role="Reviewer" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="reviewerId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="reviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chair_ToTable3">
+    <End Type="CMSModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMSModel.Reviewer" Role="Reviewer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Reviewer">
+        <PropertyRef Name="reviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

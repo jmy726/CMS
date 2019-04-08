@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CMS2.Models.KeywordBridge>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reviewer.reviewerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Keyword.keyword1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reviewer.reviewerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Keyword.keyword1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.reviewerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.reviewerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.reviewerId })
+        </td>
+    </tr>
+}
+
+</table>

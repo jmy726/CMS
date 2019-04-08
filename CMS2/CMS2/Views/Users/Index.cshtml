@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CMS2.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card-header" data-background-color="purple">
+    <h4 class="title">User</h4>
+    <p class="category">@Html.ActionLink("Create New", "Create")</p>
+</div>
+    <div class="card-content table-responsive">
+        <table class="table">
+            <thead class="text-primary">
+                <tr>
+                    <th>name</th>
+                    <th>userType</th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Author.authorId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Chair.chairId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviewer.reviewerId)
+                        </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.userType)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.userId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.userId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.userId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

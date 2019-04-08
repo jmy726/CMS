@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a4369ae2feb43b4acd68f16a20863b8" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="CMSModel.Author" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="CMSModel.Chair" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="CMSModel.Conference" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="CMSModel.Keyword" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CMSModel.Paper" Width="1.5" PointX="7.5" PointY="4.125" />
+        <EntityTypeShape EntityType="CMSModel.Review" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CMSModel.Reviewer" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="CMSModel.User" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="CMSModel.FK_Chair_ToTable1" />
+        <AssociationConnector Association="CMSModel.FK_Paper_ToTable5" />
+        <AssociationConnector Association="CMSModel.FK_Chair_ToTable" />
+        <AssociationConnector Association="CMSModel.FK_Conference_ToTable8" />
+        <AssociationConnector Association="CMSModel.FK_Paper_ToTable4" />
+        <AssociationConnector Association="CMSModel.FK_Review_ToTable11" />
+        <AssociationConnector Association="CMSModel.FK_Review_ToTable10" />
+        <AssociationConnector Association="CMSModel.FK_Chair_ToTable3" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="authorId" />
+    </Key>
+    <Property Name="authorId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chair">
+    <Key>
+      <PropertyRef Name="chairId" />
+    </Key>
+    <Property Name="chairId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="conferenceId" />
+    </Key>
+    <Property Name="conferenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="beginDate" Type="date" Nullable="false" />
+    <Property Name="endDate" Type="date" Nullable="false" />
+    <Property Name="topic" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="chairId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Keywords">
+    <Key>
+      <PropertyRef Name="keywordId" />
+    </Key>
+    <Property Name="keywordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="keyword" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Paper">
+    <Key>
+      <PropertyRef Name="paperId" />
+    </Key>
+    <Property Name="paperId" Type="int" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="paperAbstract" Type="nvarchar" MaxLength="500" />
+    <Property Name="content" Type="text" />
+    <Property Name="keywordList" Type="nvarchar" MaxLength="256" />
+    <Property Name="publishDate" Type="date" />
+    <Property Name="reviewstatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="finalstate" Type="nvarchar" MaxLength="50" />
+    <Property Name="paperType" Type="nvarchar" MaxLength="50" />
+    <Property Name="conferenceId" Type="int" />
+    <Property Name="authorId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="reviewId" />
+    </Key>
+    <Property Name="reviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reviewDate" Type="date" />
+    <Property Name="rating" Type="nvarchar" MaxLength="100" />
+    <Property Name="reviewDesc" Type="nvarchar" MaxLength="100" />
+    <Property Name="reviewerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="paperId" Type="int" />
+  </EntityType>
+  <EntityType Name="Reviewer">
+    <Key>
+      <PropertyRef Name="reviewerId" />
+    </Key>
+    <Property Name="reviewerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="keywords" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" />
+    <Property Name="userType" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <Association Name="FK_Chair_ToTable">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Chair" Type="Self.Chair" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Chair">
+        <PropertyRef Name="chairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chair_ToTable1">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chair_ToTable3">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Reviewer">
+        <PropertyRef Name="reviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conference_ToTable8">
+    <End Role="Chair" Type="Self.Chair" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chair">
+        <PropertyRef Name="chairId" />
+      </Principal>
+      <Dependent Role="Conference">
+        <PropertyRef Name="chairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paper_ToTable4">
+    <End Role="Conference" Type="Self.Conference" Multiplicity="0..1" />
+    <End Role="Paper" Type="Self.Paper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="conferenceId" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="conferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paper_ToTable5">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Paper" Type="Self.Paper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="authorId" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_ToTable10">
+    <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="reviewerId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="reviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_ToTable11">
+    <End Role="Paper" Type="Self.Paper" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paper">
+        <PropertyRef Name="paperId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="paperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMSModelStoreContainer">
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chair" EntityType="Self.Chair" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Keywords" EntityType="Self.Keywords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paper" EntityType="Self.Paper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reviewer" EntityType="Self.Reviewer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chair_ToTable" Association="Self.FK_Chair_ToTable">
+      <End Role="User" EntitySet="User" />
+      <End Role="Chair" EntitySet="Chair" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chair_ToTable1" Association="Self.FK_Chair_ToTable1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Author" EntitySet="Author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chair_ToTable3" Association="Self.FK_Chair_ToTable3">
+      <End Role="User" EntitySet="User" />
+      <End Role="Reviewer" EntitySet="Reviewer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conference_ToTable8" Association="Self.FK_Conference_ToTable8">
+      <End Role="Chair" EntitySet="Chair" />
+      <End Role="Conference" EntitySet="Conference" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paper_ToTable4" Association="Self.FK_Paper_ToTable4">
+      <End Role="Conference" EntitySet="Conference" />
+      <End Role="Paper" EntitySet="Paper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paper_ToTable5" Association="Self.FK_Paper_ToTable5">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Paper" EntitySet="Paper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_ToTable10" Association="Self.FK_Review_ToTable10">
+      <End Role="Reviewer" EntitySet="Reviewer" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_ToTable11" Association="Self.FK_Review_ToTable11">
+      <End Role="Paper" EntitySet="Paper" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
